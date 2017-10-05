@@ -1,0 +1,1260 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/27/2017 4:05:55 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{D55941EA-51C8-48B4-98A7-3704B313F286}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5583.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Pricing_API_Inventory"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{6011467A-87A5-4F19-8C38-18EB68B86D98}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{A48E6B11-909E-4BF2-AD47-EA77A96EA894}"
+      DTS:ObjectName="DB1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\AS400 Inventory Data Pull"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9947B0C4-49C6-4A8B-B106-D4A18F61713F}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AS400 Inventory Data Pull"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\AS400 Inventory Data Pull\AS400 Linked Server"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="AS400 Linked Server"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT *
+FROM OPENQUERY([10.96.0.3], 'SELECT * 
+								FROM APIASW.AX1492BFRX.WHOLOP') AS dt</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSROM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSROM]"
+                      length="3"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSROM]"
+                      name="LPSROM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLZON]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLZON]"
+                      length="2"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLZON]"
+                      name="LPLZON"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLCID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLCID]"
+                      length="8"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLCID]"
+                      name="LPLCID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPRDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPRDC]"
+                      length="35"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPRDC]"
+                      name="LPPRDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPBATC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPBATC]"
+                      length="13"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPBATC]"
+                      name="LPBATC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPFPUT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPFPUT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPFPUT]"
+                      name="LPFPUT"
+                      precision="8"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLPUT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLPUT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLPUT]"
+                      name="LPLPUT"
+                      precision="8"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLOQT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLOQT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLOQT]"
+                      name="LPLOQT"
+                      precision="17"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPIQT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPIQT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPIQT]"
+                      name="LPPIQT"
+                      precision="17"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSTTC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSTTC]"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSTTC]"
+                      name="LPSTTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLIST]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLIST]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLIST]"
+                      name="LPLIST"
+                      precision="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPIPR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPIPR]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPIPR]"
+                      name="LPPIPR"
+                      precision="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPUPR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPUPR]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPUPR]"
+                      name="LPPUPR"
+                      precision="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSDAT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSDAT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSDAT]"
+                      name="LPSDAT"
+                      precision="8"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLOCT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLOCT]"
+                      length="6"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLOCT]"
+                      name="LPLOCT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPRQNC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPRQNC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPRQNC]"
+                      name="LPRQNC"
+                      precision="15"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPUQNC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPUQNC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPUQNC]"
+                      name="LPUQNC"
+                      precision="15"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPNCCN]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPNCCN]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPNCCN]"
+                      name="LPNCCN"
+                      precision="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSENC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSENC]"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSENC]"
+                      name="LPSENC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPORFN]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPORFN]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPORFN]"
+                      name="LPORFN"
+                      precision="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPORFL]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPORFL]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPORFL]"
+                      name="LPORFL"
+                      precision="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLCRE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLCRE]"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLCRE]"
+                      name="LPLCRE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPQCYN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPQCYN]"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPQCYN]"
+                      name="LPQCYN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPTDCD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPTDCD]"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPTDCD]"
+                      name="LPTDCD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPHLBA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPHLBA]"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPHLBA]"
+                      name="LPHLBA"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSROM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="LPSROM" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLZON]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="LPLZON" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLCID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="LPLCID" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPRDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="LPPRDC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPBATC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="LPBATC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPFPUT]"
+                      dataType="numeric"
+                      name="LPFPUT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLPUT]"
+                      dataType="numeric"
+                      name="LPLPUT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLOQT]"
+                      dataType="numeric"
+                      name="LPLOQT"
+                      precision="17"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPIQT]"
+                      dataType="numeric"
+                      name="LPPIQT"
+                      precision="17"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSTTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPSTTC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLIST]"
+                      dataType="numeric"
+                      name="LPLIST"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPIPR]"
+                      dataType="numeric"
+                      name="LPPIPR"
+                      precision="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPPUPR]"
+                      dataType="numeric"
+                      name="LPPUPR"
+                      precision="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSDAT]"
+                      dataType="numeric"
+                      name="LPSDAT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLOCT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="LPLOCT" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPRQNC]"
+                      dataType="numeric"
+                      name="LPRQNC"
+                      precision="15"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPUQNC]"
+                      dataType="numeric"
+                      name="LPUQNC"
+                      precision="15"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPNCCN]"
+                      dataType="numeric"
+                      name="LPNCCN"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPSENC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPSENC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPORFN]"
+                      dataType="numeric"
+                      name="LPORFN"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPORFL]"
+                      dataType="numeric"
+                      name="LPORFL"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPLCRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPLCRE" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPQCYN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPQCYN" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPTDCD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPTDCD" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].ExternalColumns[LPHLBA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPHLBA" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSROM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSROM]"
+                      name="LPSROM" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLZON]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLZON]"
+                      name="LPLZON" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLCID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLCID]"
+                      name="LPLCID" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPRDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPRDC]"
+                      name="LPPRDC" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPBATC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPBATC]"
+                      name="LPBATC" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPFPUT]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPFPUT]"
+                      name="LPFPUT"
+                      precision="8" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLPUT]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLPUT]"
+                      name="LPLPUT"
+                      precision="8" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLOQT]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLOQT]"
+                      name="LPLOQT"
+                      precision="17"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPIQT]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPIQT]"
+                      name="LPPIQT"
+                      precision="17"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSTTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSTTC]"
+                      name="LPSTTC" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLIST]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLIST]"
+                      name="LPLIST"
+                      precision="7" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPIPR]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPIPR]"
+                      name="LPPIPR"
+                      precision="3" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPUPR]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPPUPR]"
+                      name="LPPUPR"
+                      precision="3" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSDAT]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSDAT]"
+                      name="LPSDAT"
+                      precision="8" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLOCT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLOCT]"
+                      name="LPLOCT" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPRQNC]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPRQNC]"
+                      name="LPRQNC"
+                      precision="15"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPUQNC]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPUQNC]"
+                      name="LPUQNC"
+                      precision="15"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPNCCN]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPNCCN]"
+                      name="LPNCCN"
+                      precision="7" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSENC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPSENC]"
+                      name="LPSENC" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPORFN]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPORFN]"
+                      name="LPORFN"
+                      precision="7" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPORFL]"
+                      dataType="numeric"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPORFL]"
+                      name="LPORFL"
+                      precision="5" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLCRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPLCRE]"
+                      name="LPLCRE" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPQCYN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPQCYN]"
+                      name="LPQCYN" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPTDCD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPTDCD]"
+                      name="LPTDCD" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPHLBA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[LPHLBA]"
+                      name="LPHLBA" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\AS400 Inventory Data Pull\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[API_Inventory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPSROM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="LPSROM"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSROM]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSROM]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLZON]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="LPLZON"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLZON]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLZON]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLCID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="LPLCID"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLCID]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLCID]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPPRDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="LPPRDC"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPRDC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPRDC]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPBATC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="LPBATC"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPBATC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPBATC]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPFPUT]"
+                      cachedDataType="numeric"
+                      cachedName="LPFPUT"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPFPUT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPFPUT]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLPUT]"
+                      cachedDataType="numeric"
+                      cachedName="LPLPUT"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLPUT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLPUT]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLOQT]"
+                      cachedDataType="numeric"
+                      cachedName="LPLOQT"
+                      cachedPrecision="17"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLOQT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLOQT]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPPIQT]"
+                      cachedDataType="numeric"
+                      cachedName="LPPIQT"
+                      cachedPrecision="17"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPIQT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPIQT]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPSTTC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LPSTTC"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSTTC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSTTC]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLIST]"
+                      cachedDataType="numeric"
+                      cachedName="LPLIST"
+                      cachedPrecision="7"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLIST]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLIST]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPPIPR]"
+                      cachedDataType="numeric"
+                      cachedName="LPPIPR"
+                      cachedPrecision="3"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPIPR]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPIPR]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPPUPR]"
+                      cachedDataType="numeric"
+                      cachedName="LPPUPR"
+                      cachedPrecision="3"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPUPR]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPPUPR]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPSDAT]"
+                      cachedDataType="numeric"
+                      cachedName="LPSDAT"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSDAT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSDAT]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLOCT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="LPLOCT"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLOCT]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLOCT]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPRQNC]"
+                      cachedDataType="numeric"
+                      cachedName="LPRQNC"
+                      cachedPrecision="15"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPRQNC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPRQNC]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPUQNC]"
+                      cachedDataType="numeric"
+                      cachedName="LPUQNC"
+                      cachedPrecision="15"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPUQNC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPUQNC]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPNCCN]"
+                      cachedDataType="numeric"
+                      cachedName="LPNCCN"
+                      cachedPrecision="7"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPNCCN]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPNCCN]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPSENC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LPSENC"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSENC]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPSENC]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPORFN]"
+                      cachedDataType="numeric"
+                      cachedName="LPORFN"
+                      cachedPrecision="7"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPORFN]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPORFN]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPORFL]"
+                      cachedDataType="numeric"
+                      cachedName="LPORFL"
+                      cachedPrecision="5"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPORFL]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPORFL]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPLCRE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LPLCRE"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLCRE]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPLCRE]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPQCYN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LPQCYN"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPQCYN]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPQCYN]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPTDCD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LPTDCD"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPTDCD]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPTDCD]" />
+                    <inputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LPHLBA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="LPHLBA"
+                      externalMetadataColumnId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPHLBA]"
+                      lineageId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output].Columns[LPHLBA]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSROM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="LPSROM" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLZON]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="LPLZON" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLCID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="LPLCID" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPRDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="LPPRDC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPBATC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="LPBATC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPFPUT]"
+                      dataType="numeric"
+                      name="LPFPUT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLPUT]"
+                      dataType="numeric"
+                      name="LPLPUT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLOQT]"
+                      dataType="numeric"
+                      name="LPLOQT"
+                      precision="17"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPIQT]"
+                      dataType="numeric"
+                      name="LPPIQT"
+                      precision="17"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSTTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPSTTC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLIST]"
+                      dataType="numeric"
+                      name="LPLIST"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPIPR]"
+                      dataType="numeric"
+                      name="LPPIPR"
+                      precision="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPPUPR]"
+                      dataType="numeric"
+                      name="LPPUPR"
+                      precision="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSDAT]"
+                      dataType="numeric"
+                      name="LPSDAT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLOCT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="LPLOCT" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPRQNC]"
+                      dataType="numeric"
+                      name="LPRQNC"
+                      precision="15"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPUQNC]"
+                      dataType="numeric"
+                      name="LPUQNC"
+                      precision="15"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPNCCN]"
+                      dataType="numeric"
+                      name="LPNCCN"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPSENC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPSENC" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPORFN]"
+                      dataType="numeric"
+                      name="LPORFN"
+                      precision="7" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPORFL]"
+                      dataType="numeric"
+                      name="LPORFL"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPLCRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPLCRE" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPQCYN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPQCYN" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPTDCD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPTDCD" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LPHLBA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="LPHLBA" />
+                    <externalMetadataColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\AS400 Inventory Data Pull\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\AS400 Inventory Data Pull\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\AS400 Inventory Data Pull\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\AS400 Inventory Data Pull.Paths[OLE DB Source Output]"
+              endId="Package\AS400 Inventory Data Pull\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\AS400 Inventory Data Pull\AS400 Linked Server.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="203,42"
+          Id="Package\AS400 Inventory Data Pull"
+          TopLeft="159,78" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\AS400 Inventory Data Pull">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\AS400 Inventory Data Pull\AS400 Linked Server"
+          TopLeft="209,52" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\AS400 Inventory Data Pull\OLE DB Destination"
+          TopLeft="302,151" />
+        <EdgeLayout
+          Id="Package\AS400 Inventory Data Pull.Paths[OLE DB Source Output]"
+          TopLeft="297,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="90.5,57"
+              Start="0,0"
+              End="90.5,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="4,28.5" />
+                  <mssgle:LineSegment
+                    End="86.5,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="86.5,28.5"
+                    Point2="90.5,28.5"
+                    Point3="90.5,32.5" />
+                  <mssgle:LineSegment
+                    End="90.5,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\AS400 Inventory Data Pull\AS400 Linked Server">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AS400 Inventory Data Pull\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

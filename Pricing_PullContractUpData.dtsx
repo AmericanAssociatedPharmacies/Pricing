@@ -1,0 +1,1625 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/19/2017 4:42:44 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{E61961C0-C37E-4DC8-9BE5-05074FE5E52E}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5583.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Pricing_PullContractUpData"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{2B74DDAD-D65B-4D2F-93D2-38FA191A383C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{C0A61CEC-5510-4E19-96A2-8ABDA3B8EF34}"
+      DTS:ObjectName="DB1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Staging ContractUp table"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2CCF3DBE-C2D7-4F8B-9DDB-A56E9D37982B}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Staging ContractUp table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Staging ContractUp table\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[ContractUp]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging ContractUp table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[case pk]"
+                      cachedDataType="r8"
+                      cachedName="case pk"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[case pk]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[case pk]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[inner pk]"
+                      cachedDataType="r8"
+                      cachedName="inner pk"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inner pk]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[inner pk]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[1]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="1"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[1]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[1]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[2]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="2"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[2]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[2]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Control Rx]"
+                      cachedDataType="bool"
+                      cachedName="Control Rx"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Control Rx]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Control Rx]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[API ITEM #]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="API ITEM #"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[API ITEM #]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API ITEM #]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REPLACE#]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="REPLACE#"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REPLACE#]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPLACE#]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NDC #]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NDC #"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC #]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC #]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[temp-ndc number]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="temp-ndc number"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[temp-ndc number]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[temp-ndc number]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BRAND REFER]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="BRAND REFER"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BRAND REFER]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[BRAND REFER]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ITEM DESCRIPTION]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ITEM DESCRIPTION"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ITEM DESCRIPTION]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ITEM DESCRIPTION]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UNIT]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="UNIT"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UNIT]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[UNIT]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SIZE]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SIZE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SIZE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIZE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTRACT]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CONTRACT"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CONTRACT]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONTRACT]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[INVOICE PRICE]"
+                      cachedDataType="cy"
+                      cachedName="INVOICE PRICE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[INVOICE PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[INVOICE PRICE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTRACT PRICE]"
+                      cachedDataType="cy"
+                      cachedName="CONTRACT PRICE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CONTRACT PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONTRACT PRICE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[API PRICE]"
+                      cachedDataType="cy"
+                      cachedName="API PRICE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[API PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API PRICE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FEE SCHED]"
+                      cachedDataType="r8"
+                      cachedName="FEE SCHED"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FEE SCHED]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEE SCHED]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AWP]"
+                      cachedDataType="cy"
+                      cachedName="AWP"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AWP]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AWP]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PROGRAM]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PROGRAM"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PROGRAM]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROGRAM]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RATE]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="RATE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RATE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MFG Multiple for  Rebate]"
+                      cachedDataType="r8"
+                      cachedName="MFG Multiple for  Rebate"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFG Multiple for  Rebate]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MFG Multiple for  Rebate]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NET PRICE]"
+                      cachedDataType="cy"
+                      cachedName="NET PRICE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NET PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NET PRICE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REBATE]"
+                      cachedDataType="cy"
+                      cachedName="REBATE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REBATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REBATE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[% REBATE]"
+                      cachedDataType="r8"
+                      cachedName="% REBATE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[% REBATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[% REBATE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Value Add Factor]"
+                      cachedDataType="r8"
+                      cachedName="Value Add Factor"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Value Add Factor]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Value Add Factor]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Value Add Basis]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Value Add Basis"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Value Add Basis]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Value Add Basis]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADR Item]"
+                      cachedDataType="bool"
+                      cachedName="ADR Item"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ADR Item]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ADR Item]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADR Expiry]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ADR Expiry"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ADR Expiry]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ADR Expiry]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MFG DATE]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MFG DATE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFG DATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MFG DATE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Work Date]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Work Date"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Work Date]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Work Date]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[API DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="API DATE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[API DATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API DATE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REVIEW]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="REVIEW"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REVIEW]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REVIEW]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GPI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="GPI"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GPI]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[GPI]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TempSIZE]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TempSIZE"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TempSIZE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[TempSIZE]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[billable size]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="billable size"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[billable size]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[billable size]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[billable cost]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="billable cost"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[billable cost]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[billable cost]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[4% of price]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="4% of price"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[4% of price]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[4% of price]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rebate minus 4% of price]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="rebate minus 4% of price"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rebate minus 4% of price]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[rebate minus 4% of price]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Comments]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Comments"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]" />
+                    <inputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[case pk]"
+                      dataType="r8"
+                      name="case pk" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[inner pk]"
+                      dataType="r8"
+                      name="inner pk" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[1]"
+                      dataType="wstr"
+                      length="255"
+                      name="1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[2]"
+                      dataType="wstr"
+                      length="255"
+                      name="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Control Rx]"
+                      dataType="bool"
+                      name="Control Rx" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[API ITEM #]"
+                      dataType="wstr"
+                      length="255"
+                      name="API ITEM #" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REPLACE#]"
+                      dataType="wstr"
+                      length="255"
+                      name="REPLACE#" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC #]"
+                      dataType="wstr"
+                      length="255"
+                      name="NDC #" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[temp-ndc number]"
+                      dataType="wstr"
+                      length="255"
+                      name="temp-ndc number" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BRAND REFER]"
+                      dataType="wstr"
+                      length="255"
+                      name="BRAND REFER" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ITEM DESCRIPTION]"
+                      dataType="wstr"
+                      length="255"
+                      name="ITEM DESCRIPTION" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UNIT]"
+                      dataType="wstr"
+                      length="255"
+                      name="UNIT" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SIZE]"
+                      dataType="wstr"
+                      length="255"
+                      name="SIZE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CONTRACT]"
+                      dataType="wstr"
+                      length="255"
+                      name="CONTRACT" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[INVOICE PRICE]"
+                      dataType="cy"
+                      name="INVOICE PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CONTRACT PRICE]"
+                      dataType="cy"
+                      name="CONTRACT PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[API PRICE]"
+                      dataType="cy"
+                      name="API PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FEE SCHED]"
+                      dataType="r8"
+                      name="FEE SCHED" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AWP]"
+                      dataType="cy"
+                      name="AWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PROGRAM]"
+                      dataType="wstr"
+                      length="255"
+                      name="PROGRAM" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RATE]"
+                      dataType="wstr"
+                      length="255"
+                      name="RATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFG Multiple for  Rebate]"
+                      dataType="r8"
+                      name="MFG Multiple for  Rebate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NET PRICE]"
+                      dataType="cy"
+                      name="NET PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REBATE]"
+                      dataType="cy"
+                      name="REBATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[% REBATE]"
+                      dataType="r8"
+                      name="% REBATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Value Add Factor]"
+                      dataType="r8"
+                      name="Value Add Factor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Value Add Basis]"
+                      dataType="wstr"
+                      length="255"
+                      name="Value Add Basis" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ADR Item]"
+                      dataType="bool"
+                      name="ADR Item" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ADR Expiry]"
+                      dataType="wstr"
+                      length="255"
+                      name="ADR Expiry" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFG DATE]"
+                      dataType="wstr"
+                      length="255"
+                      name="MFG DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Work Date]"
+                      dataType="wstr"
+                      length="255"
+                      name="Work Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[API DATE]"
+                      dataType="dbTimeStamp"
+                      name="API DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REVIEW]"
+                      dataType="wstr"
+                      length="255"
+                      name="REVIEW" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GPI]"
+                      dataType="wstr"
+                      length="255"
+                      name="GPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TempSIZE]"
+                      dataType="wstr"
+                      length="255"
+                      name="TempSIZE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[billable size]"
+                      dataType="wstr"
+                      length="255"
+                      name="billable size" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[billable cost]"
+                      dataType="wstr"
+                      length="255"
+                      name="billable cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[4% of price]"
+                      dataType="wstr"
+                      length="255"
+                      name="4% of price" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rebate minus 4% of price]"
+                      dataType="wstr"
+                      length="255"
+                      name="rebate minus 4% of price" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="255"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Staging ContractUp table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Staging ContractUp table\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">EXEC [dbo].[usp_GetContractUpData]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging ContractUp table\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[case pk]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[case pk]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[case pk]"
+                      name="case pk"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[inner pk]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[inner pk]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[inner pk]"
+                      name="inner pk"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[1]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[1]"
+                      name="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[2]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[2]"
+                      name="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Control Rx]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Control Rx]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Control Rx]"
+                      name="Control Rx"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API ITEM #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API ITEM #]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API ITEM #]"
+                      name="API ITEM #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPLACE#]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REPLACE#]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REPLACE#]"
+                      name="REPLACE#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC #]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC #]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC #]"
+                      name="NDC #"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[temp-ndc number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[temp-ndc number]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[temp-ndc number]"
+                      name="temp-ndc number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[BRAND REFER]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BRAND REFER]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[BRAND REFER]"
+                      name="BRAND REFER"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ITEM DESCRIPTION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ITEM DESCRIPTION]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ITEM DESCRIPTION]"
+                      name="ITEM DESCRIPTION"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[UNIT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UNIT]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[UNIT]"
+                      name="UNIT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIZE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SIZE]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[SIZE]"
+                      name="SIZE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONTRACT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CONTRACT]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONTRACT]"
+                      name="CONTRACT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[INVOICE PRICE]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[INVOICE PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[INVOICE PRICE]"
+                      name="INVOICE PRICE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONTRACT PRICE]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CONTRACT PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONTRACT PRICE]"
+                      name="CONTRACT PRICE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API PRICE]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API PRICE]"
+                      name="API PRICE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEE SCHED]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FEE SCHED]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FEE SCHED]"
+                      name="FEE SCHED"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AWP]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AWP]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[AWP]"
+                      name="AWP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROGRAM]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROGRAM]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PROGRAM]"
+                      name="PROGRAM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RATE]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[RATE]"
+                      name="RATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MFG Multiple for  Rebate]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MFG Multiple for  Rebate]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MFG Multiple for  Rebate]"
+                      name="MFG Multiple for  Rebate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NET PRICE]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NET PRICE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[NET PRICE]"
+                      name="NET PRICE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REBATE]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REBATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REBATE]"
+                      name="REBATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[% REBATE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[% REBATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[% REBATE]"
+                      name="% REBATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Value Add Factor]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Value Add Factor]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Value Add Factor]"
+                      name="Value Add Factor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Value Add Basis]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Value Add Basis]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Value Add Basis]"
+                      name="Value Add Basis"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ADR Item]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ADR Item]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ADR Item]"
+                      name="ADR Item"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ADR Expiry]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ADR Expiry]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ADR Expiry]"
+                      name="ADR Expiry"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MFG DATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MFG DATE]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[MFG DATE]"
+                      name="MFG DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Work Date]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Work Date]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Work Date]"
+                      name="Work Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API DATE]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[API DATE]"
+                      name="API DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REVIEW]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REVIEW]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[REVIEW]"
+                      name="REVIEW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[GPI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GPI]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[GPI]"
+                      name="GPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[TempSIZE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TempSIZE]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[TempSIZE]"
+                      name="TempSIZE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[billable size]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[billable size]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[billable size]"
+                      name="billable size"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[billable cost]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[billable cost]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[billable cost]"
+                      name="billable cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[4% of price]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[4% of price]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[4% of price]"
+                      name="4% of price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[rebate minus 4% of price]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rebate minus 4% of price]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[rebate minus 4% of price]"
+                      name="rebate minus 4% of price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Comments]"
+                      name="Comments"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[case pk]"
+                      dataType="r8"
+                      name="case pk" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[inner pk]"
+                      dataType="r8"
+                      name="inner pk" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[1]"
+                      dataType="wstr"
+                      length="255"
+                      name="1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[2]"
+                      dataType="wstr"
+                      length="255"
+                      name="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Control Rx]"
+                      dataType="bool"
+                      name="Control Rx" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API ITEM #]"
+                      dataType="wstr"
+                      length="255"
+                      name="API ITEM #" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REPLACE#]"
+                      dataType="wstr"
+                      length="255"
+                      name="REPLACE#" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC #]"
+                      dataType="wstr"
+                      length="255"
+                      name="NDC #" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[temp-ndc number]"
+                      dataType="wstr"
+                      length="255"
+                      name="temp-ndc number" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BRAND REFER]"
+                      dataType="wstr"
+                      length="255"
+                      name="BRAND REFER" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ITEM DESCRIPTION]"
+                      dataType="wstr"
+                      length="255"
+                      name="ITEM DESCRIPTION" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UNIT]"
+                      dataType="wstr"
+                      length="255"
+                      name="UNIT" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SIZE]"
+                      dataType="wstr"
+                      length="255"
+                      name="SIZE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CONTRACT]"
+                      dataType="wstr"
+                      length="255"
+                      name="CONTRACT" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[INVOICE PRICE]"
+                      dataType="cy"
+                      name="INVOICE PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CONTRACT PRICE]"
+                      dataType="cy"
+                      name="CONTRACT PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API PRICE]"
+                      dataType="cy"
+                      name="API PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FEE SCHED]"
+                      dataType="r8"
+                      name="FEE SCHED" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AWP]"
+                      dataType="cy"
+                      name="AWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PROGRAM]"
+                      dataType="wstr"
+                      length="255"
+                      name="PROGRAM" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RATE]"
+                      dataType="wstr"
+                      length="255"
+                      name="RATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MFG Multiple for  Rebate]"
+                      dataType="r8"
+                      name="MFG Multiple for  Rebate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NET PRICE]"
+                      dataType="cy"
+                      name="NET PRICE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REBATE]"
+                      dataType="cy"
+                      name="REBATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[% REBATE]"
+                      dataType="r8"
+                      name="% REBATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Value Add Factor]"
+                      dataType="r8"
+                      name="Value Add Factor" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Value Add Basis]"
+                      dataType="wstr"
+                      length="255"
+                      name="Value Add Basis" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ADR Item]"
+                      dataType="bool"
+                      name="ADR Item" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ADR Expiry]"
+                      dataType="wstr"
+                      length="255"
+                      name="ADR Expiry" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MFG DATE]"
+                      dataType="wstr"
+                      length="255"
+                      name="MFG DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Work Date]"
+                      dataType="wstr"
+                      length="255"
+                      name="Work Date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API DATE]"
+                      dataType="dbTimeStamp"
+                      name="API DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[REVIEW]"
+                      dataType="wstr"
+                      length="255"
+                      name="REVIEW" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GPI]"
+                      dataType="wstr"
+                      length="255"
+                      name="GPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TempSIZE]"
+                      dataType="wstr"
+                      length="255"
+                      name="TempSIZE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[billable size]"
+                      dataType="wstr"
+                      length="255"
+                      name="billable size" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[billable cost]"
+                      dataType="wstr"
+                      length="255"
+                      name="billable cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[4% of price]"
+                      dataType="wstr"
+                      length="255"
+                      name="4% of price" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rebate minus 4% of price]"
+                      dataType="wstr"
+                      length="255"
+                      name="rebate minus 4% of price" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      dataType="wstr"
+                      length="255"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[case pk]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[case pk]"
+                      name="case pk" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[inner pk]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[inner pk]"
+                      name="inner pk" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[1]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[1]"
+                      name="1" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[2]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[2]"
+                      name="2" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Control Rx]"
+                      dataType="bool"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Control Rx]"
+                      name="Control Rx" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API ITEM #]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API ITEM #]"
+                      name="API ITEM #" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REPLACE#]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REPLACE#]"
+                      name="REPLACE#" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC #]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC #]"
+                      name="NDC #" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[temp-ndc number]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[temp-ndc number]"
+                      name="temp-ndc number" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BRAND REFER]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BRAND REFER]"
+                      name="BRAND REFER" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ITEM DESCRIPTION]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ITEM DESCRIPTION]"
+                      name="ITEM DESCRIPTION" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UNIT]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UNIT]"
+                      name="UNIT" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SIZE]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SIZE]"
+                      name="SIZE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CONTRACT]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CONTRACT]"
+                      name="CONTRACT" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[INVOICE PRICE]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[INVOICE PRICE]"
+                      name="INVOICE PRICE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CONTRACT PRICE]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CONTRACT PRICE]"
+                      name="CONTRACT PRICE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API PRICE]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API PRICE]"
+                      name="API PRICE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FEE SCHED]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FEE SCHED]"
+                      name="FEE SCHED" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AWP]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AWP]"
+                      name="AWP" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROGRAM]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PROGRAM]"
+                      name="PROGRAM" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RATE]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RATE]"
+                      name="RATE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MFG Multiple for  Rebate]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MFG Multiple for  Rebate]"
+                      name="MFG Multiple for  Rebate" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NET PRICE]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NET PRICE]"
+                      name="NET PRICE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REBATE]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REBATE]"
+                      name="REBATE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[% REBATE]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[% REBATE]"
+                      name="% REBATE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Value Add Factor]"
+                      dataType="r8"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Value Add Factor]"
+                      name="Value Add Factor" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Value Add Basis]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Value Add Basis]"
+                      name="Value Add Basis" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ADR Item]"
+                      dataType="bool"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ADR Item]"
+                      name="ADR Item" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ADR Expiry]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ADR Expiry]"
+                      name="ADR Expiry" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MFG DATE]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MFG DATE]"
+                      name="MFG DATE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Work Date]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Work Date]"
+                      name="Work Date" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API DATE]"
+                      name="API DATE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REVIEW]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[REVIEW]"
+                      name="REVIEW" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GPI]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GPI]"
+                      name="GPI" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TempSIZE]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TempSIZE]"
+                      name="TempSIZE" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[billable size]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[billable size]"
+                      name="billable size" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[billable cost]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[billable cost]"
+                      name="billable cost" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[4% of price]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[4% of price]"
+                      name="4% of price" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rebate minus 4% of price]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rebate minus 4% of price]"
+                      name="rebate minus 4% of price" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      name="Comments" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Staging ContractUp table.Paths[OLE DB Source Output]"
+              endId="Package\Load Staging ContractUp table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Staging ContractUp table\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="223,42"
+          Id="Package\Load Staging ContractUp table"
+          TopLeft="463,146" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Staging ContractUp table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Staging ContractUp table\OLE DB Source"
+          TopLeft="519,177" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Staging ContractUp table\OLE DB Destination"
+          TopLeft="453,310" />
+        <EdgeLayout
+          Id="Package\Load Staging ContractUp table.Paths[OLE DB Source Output]"
+          TopLeft="594,219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-55.5,91"
+              Start="0,0"
+              End="-55.5,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.5"
+                    Point2="0,45.5"
+                    Point3="-4,45.5" />
+                  <mssgle:LineSegment
+                    End="-51.5,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-51.5,45.5"
+                    Point2="-55.5,45.5"
+                    Point3="-55.5,49.5" />
+                  <mssgle:LineSegment
+                    End="-55.5,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging ContractUp table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging ContractUp table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
